@@ -21,9 +21,16 @@ public class MinMaxSensorData {
 
         for (Map.Entry<String, JsonValue> result : data.entrySet()) {
             JsonObject value = (JsonObject) result.getValue();
-            double valor = value.getInt("Value");
+            if(value.getBoolean("SensorActive") == true) {
+                boolean valor = value.getBoolean("SensorActive");
+                System.out.println(result.getKey() + ": " + valor);
+            }
+            else if(value.getJsonObject("Day") != null){
+
+            }
+            /*double valor = value.getInt("Value");
             String unidade = value.getString("Unit");
-            System.out.println(result.getKey() + ": " + valor + " " + unidade);
+            System.out.println(result.getKey() + ": " + valor + " " + unidade);*/
         }
     }
 }

@@ -1,7 +1,4 @@
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import javax.json.JsonValue;
+import javax.json.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -21,9 +18,12 @@ public class NowSensorData {
 
         for (Map.Entry<String, JsonValue> result : data.entrySet()) {
             JsonObject value = (JsonObject) result.getValue();
-            int valor = value.getInt("Value");
-            String unidade = value.getString("Unit");
-            System.out.println(result.getKey() + ": " + valor + " " + unidade);
+
+            if(value.getJsonNumber("Value") != null){
+                JsonNumber valor = value.getJsonNumber("Value");
+                String unidade = value.getString("Unit");
+                System.out.println(result.getKey() + ": " + valor + " " + unidade);
+            }
         }
     }
 }
